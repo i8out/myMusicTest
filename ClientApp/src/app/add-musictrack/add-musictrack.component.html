@@ -1,0 +1,41 @@
+<div>
+  <form #musictrackForm="ngForm" (ngSubmit)="addMusicTrack()">
+    <span>Required marked *</span>
+    <div class="form-group">
+      <label for="title">Title*</label>
+      <input type="text" class="form-control"
+             name="title"
+             required
+             [(ngModel)]="musictrack.title"
+             #title="ngModel">
+    </div>
+    <div class="form-group">
+      <label for="artist">Artist*</label>
+      <input type="text" class="form-control"
+             name="artist"
+             required
+             [(ngModel)]="musictrack.artist"
+             #artist="ngModel">
+    </div>
+    <div class="form-group">
+      <label for="genre">Genre*</label>
+      <select class="form-control"
+              name="genre"
+              required
+              [(ngModel)]="musictrack.genre"
+              #genre="ngModel">
+        <option *ngFor="let genre of genres" [value]="genre">{{genre}}</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-success"
+            [disabled]="!musictrackForm.form.valid">
+      Submit
+    </button>
+    <button type="reset" class="btn"
+            (click)="musictrackForm.reset()">
+      Reset
+    </button>
+  </form>
+</div>
+
