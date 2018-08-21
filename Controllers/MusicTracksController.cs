@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using myMusic.Model;
@@ -14,9 +12,6 @@ namespace myMusic.Controllers
     public class MusicTracksController : ControllerBase
     {
         private readonly MusicTracksContext _context;
-
-        private static string[] Genres = new[]{
-            "Classical", "Disco", "Jazz", "Opm", "Pop", "Standard"};
 
         public MusicTracksController(MusicTracksContext context)
         {
@@ -124,7 +119,7 @@ namespace myMusic.Controllers
         [HttpGet("Genres")]
         public string[] GetGenres()
         {
-            return Genres;
+            return Genre.GenreList(); ;
         }
 
         private bool MusicTrackExists(int id)
