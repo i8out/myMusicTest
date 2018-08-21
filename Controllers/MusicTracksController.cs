@@ -15,6 +15,9 @@ namespace myMusic.Controllers
     {
         private readonly MusicTracksContext _context;
 
+        private static string[] Genres = new[]{
+            "Classical", "Disco", "Jazz", "Opm", "Pop", "Standard"};
+
         public MusicTracksController(MusicTracksContext context)
         {
             _context = context;
@@ -115,6 +118,13 @@ namespace myMusic.Controllers
             await _context.SaveChangesAsync();
 
             return Ok(musicTrack);
+        }
+
+        // GET: api/MusicTracks
+        [HttpGet("Genres")]
+        public string[] GetGenres()
+        {
+            return Genres;
         }
 
         private bool MusicTrackExists(int id)

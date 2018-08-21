@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from "rxjs/Observable";
 import { MusicTrack } from "./musictrack";
+import { Genre } from './Genre';
 
 @Injectable()
 export class MusictracksService {
@@ -31,5 +32,10 @@ export class MusictracksService {
   // Delete a music track
   deleteMusicTrack(id: number) {
     return this.httpClient.delete('/api/MusicTracks/' + id);
+  }
+
+  // Getting the genres
+  getGenres(): Observable<Genre[]> {
+    return this.httpClient.get<Genre[]>('/api/MusicTracks/Genres');
   }
 }

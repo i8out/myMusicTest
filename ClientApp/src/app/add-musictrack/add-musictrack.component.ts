@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { MusictracksService } from '../musictracks.service';
 import { MusicTrack } from "../musictrack";
+import { Genre } from "../genre";
 
 @Component({
   selector: 'app-add-musictrack',
@@ -11,19 +12,16 @@ import { MusicTrack } from "../musictrack";
 })
 export class AddMusictrackComponent {
 
-  public genres: string[];
+  public genres: Genre[];
   public musictrack: MusicTrack = {};
 
   constructor(
     private router: Router,
     private musictracksSvc: MusictracksService) {
-    this.genres = [
-      "Broadway",
-      "Classical",
-      "Disco",
-      "Opm",
-      "Pop"
-    ];
+    this.musictracksSvc.getGenres()
+      .subscribe(genres => {
+        this.genres = genres;
+      });
   }
 
   addMusicTrack() {

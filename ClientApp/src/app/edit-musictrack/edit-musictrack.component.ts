@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 
 import { MusicTrack } from '../musictrack';
 import { MusictracksService } from '../musictracks.service';
+import { Genre } from '../Genre';
 
 @Component({
   selector: 'app-edit-musictrack',
@@ -12,20 +13,17 @@ import { MusictracksService } from '../musictracks.service';
 })
 export class EditMusictrackComponent implements OnInit {
   @Input() musictrack: MusicTrack;
-  public genres: string[];
+  public genres: Genre[];
 
   constructor(
     private route: ActivatedRoute,
-    private musictracksService: MusictracksService,
-    private location: Location
-  ) {
-  this.genres = [
-    "Broadway",
-    "Classical",
-    "Disco",
-    "Opm",
-    "Pop"
-  ];}
+    private location: Location,
+    private musictracksService: MusictracksService) {
+    this.musictracksService.getGenres()
+      .subscribe(genres => {
+        this.genres = genres;
+      });
+  }
 
   ngOnInit(): void {
     this.getMusicTrack();
